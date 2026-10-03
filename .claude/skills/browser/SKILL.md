@@ -1,6 +1,6 @@
 ---
 name: browser
-description: Web browser automation with AI-optimized snapshots for claude-flow agents
+description: Web browser automation with AI-optimized snapshots for Ruflo agents (agent-browser CLI)
 version: 1.0.0
 triggers:
   - /browser
@@ -19,6 +19,11 @@ tools:
 ---
 
 # Browser Automation Skill
+
+Requires the `agent-browser` CLI, which is not installed by default:
+`npm install -g agent-browser@0.38.2` (or prefix commands with
+`npx -y agent-browser@0.38.2`). For the full, version-matched command
+reference run `agent-browser skills get core --full`.
 
 Web browser automation using agent-browser with AI-optimized snapshots. Reduces context by 93% using element refs (@e1, @e2) instead of full DOM.
 
@@ -180,19 +185,19 @@ All browser operations are available as MCP tools with `browser/` prefix:
 ### Memory Integration
 ```bash
 # Store successful patterns
-npx @claude-flow/cli memory store --namespace browser-patterns --key "login-flow" --value "snapshot->fill->click->wait"
+npx -y ruflo@3.51.1 memory store -n browser-patterns -k "login-flow" --value "snapshot->fill->click->wait"
 
 # Retrieve before similar task
-npx @claude-flow/cli memory search --query "login automation"
+npx -y ruflo@3.51.1 memory search -q "login automation"
 ```
 
 ### Hooks
 ```bash
 # Pre-browse hook (get context)
-npx @claude-flow/cli hooks pre-edit --file "browser-task.ts"
+npx -y ruflo@3.51.1 hooks pre-edit -f "browser-task.ts"
 
 # Post-browse hook (record success)
-npx @claude-flow/cli hooks post-task --task-id "browse-1" --success true
+npx -y ruflo@3.51.1 hooks post-task -i "browse-1" -s true
 ```
 
 ## Tips

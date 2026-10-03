@@ -1,16 +1,10 @@
 #!/bin/bash
-# Claude Flow Post-Commit Hook
-# Records commit metrics and trains patterns
+# Ruflo Post-Commit Hook
+# Records the commit in the Ruflo session log
 
-COMMIT_HASH=$(git rev-parse HEAD)
-COMMIT_MSG=$(git log -1 --pretty=%B)
+COMMIT_HASH=$(git rev-parse --short HEAD)
+COMMIT_SUBJECT=$(git log -1 --pretty=%s)
 
-echo "📊 Recording commit metrics..."
-
-# Notify claude-flow of commit
-npx @claude-flow/cli hooks notify \
-  --message "Commit: $COMMIT_MSG" \
-  --level info \
-  --metadata '{"hash": "'$COMMIT_HASH'"}' 2>/dev/null || true
-
-echo "✅ Commit recorded"
+npx -y ruflo@3.51.1 hooks notify \
+  --message "Commit $COMMIT_HASH: $COMMIT_SUBJECT" \
+  --level info 2>/dev/null || true

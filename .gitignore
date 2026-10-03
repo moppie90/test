@@ -8,3 +8,10 @@
 .claude/settings.json.bak-*
 *.db-wal
 *.db-shm
+# Ruflo machine-specific and adaptive runtime state
+.claude-flow/memory-package.json
+.claude-flow/policy/
+.claude-flow/harness-active-policy.json
+.claude-flow/metrics/
+.claude/proven-config.json
+.claude/.proven-config-version
